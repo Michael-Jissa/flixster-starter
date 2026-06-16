@@ -1,28 +1,345 @@
 .App {
-  text-align: center;
+  min-height: 100vh;
+  color: #eef1ff;
+  background-image: url("/Amazing%20Spider%20Man%20Wallpaper.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.App-header {
-  background-color: #282c34;
+.app-header,
+.sidebar,
+.movie-card,
+.movie-modal,
+.app-footer {
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32), 0 10px 28px rgba(0, 0, 0, 0.32);
+}
+
+.app-header {
+  width: min(1500px, calc(100% - 1rem));
+  margin: 0.7rem auto 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  color: #ffffff;
+  padding: 0.45rem 0.8rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.app-brand {
+  margin: 0;
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #ffffff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+
+.search-controls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.search-form input {
+  flex: 1;
+  min-width: 280px;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.36);
+  color: #f5f8ff;
+  font-size: 0.95rem;
+}
+
+.search-form input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.search-form button,
+.now-playing-button,
+.sort-control select,
+.load-more-container button,
+.movie-modal-close,
+.generate-ai-button,
+.sidebar-filters button {
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #eff4ff;
+  padding: 9px 13px;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.search-form button:hover,
+.now-playing-button:hover,
+.load-more-container button:hover,
+.movie-modal-close:hover,
+.generate-ai-button:hover,
+.sidebar-filters button:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.search-form button:disabled,
+.now-playing-button:disabled,
+.load-more-container button:disabled,
+.generate-ai-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.sort-control {
+  justify-self: end;
+}
+
+.sort-control select {
+  min-width: 110px;
+  font-size: 0.8rem;
+  padding: 8px 10px;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(150, 197, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.App-main {
+  width: calc(100% - 1rem);
+  margin: 0.65rem auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 12px;
+}
+
+.content-area {
+  min-width: 0;
+}
+
+.sidebar {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 12px;
+  height: fit-content;
+  position: sticky;
+  top: 12px;
+}
+
+.sidebar h2 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.sidebar-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-filter-active {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.sidebar-section {
+  margin-top: 12px;
+}
+
+.sidebar-section h3 {
+  margin: 0 0 6px;
+  font-size: 0.88rem;
+  color: #e4eaff;
+}
+
+.sidebar-section ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.sidebar-section li {
+  margin-bottom: 5px;
+  color: #cad4ff;
+  font-size: 0.85rem;
+}
+
+.sidebar-empty {
+  margin: 0;
+  color: #aab4dd;
+  font-size: 0.84rem;
+}
+
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.status-message {
+  margin: 24px 0;
+  text-align: center;
+  color: #dee6ff;
+}
+
+.status-message-error {
+  color: #ffb2c0;
+}
+
+.load-more-container {
+  margin: 18px 0 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.movie-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  z-index: 1000;
+}
+
+.movie-modal {
+  width: min(800px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.42),
+    0 18px 44px rgba(0, 0, 0, 0.34);
+}
+
+.movie-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  font-size: 1.15rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+.movie-modal-backdrop {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.movie-modal-overview {
+  line-height: 1.55;
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.movie-modal-section {
+  margin-top: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  padding-top: 10px;
+}
+
+.movie-modal-section h3 {
+  margin: 0 0 8px;
+}
+
+.trailer-frame-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.trailer-frame-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.app-footer {
+  width: min(1500px, calc(100% - 1rem));
+  margin: 0.75rem auto 1rem;
+  padding: 10px 14px;
+  text-align: center;
+  color: #ffffff;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  color: white;
-  padding: 20px;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 600px) {
-  .movie-card {
-    width: 100%;
+.app-footer p {
+  margin: 0;
+}
+
+.app-footer a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1400px) {
+  .movie-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1120px) {
+  .App-main {
+    grid-template-columns: 1fr;
   }
 
-  .search-bar {
-    flex-direction: column;
-    gap: 10px;
+  .sidebar {
+    position: static;
   }
 
-  .search-bar form {
-    flex-direction: column;
+  .movie-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .app-header {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .sort-control {
+    justify-self: start;
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
