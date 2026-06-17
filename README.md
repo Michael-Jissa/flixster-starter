@@ -115,26 +115,31 @@ Deployed Application (optional): https://mjflixster.onrender.com/
 
 `TODO://` Paste the **shareable link** to your animated app walkthrough below (replace `ADD_LOOM_LINK_HERE`). GitHub markdown won't render an embedded Loom player, so a plain link is what graders will use. Make sure the link is public and playable before submitting. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website. (🚫 Remove this paragraph after adding your walkthrough link.)
 
-**Walkthrough video:** https://www.loom.com/share/9adb1f580f8946f392e2b6009eb397b8
+**Walkthrough video:** https://www.loom.com/share/9e792ab232454271910b0fc694333770
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+Yes, I felt prepared for most of the work. One thing that I might not have felt as prepared for was writing functions that construct URLs for a pull out of a specific item via the API (specifically the embeded trailers)
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+If I had more time, I would've added a backend and a simple algorithm that recommends the user based on their favorited and/or watched movie.
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+The project over all went well. One thing some of my peers had that I would consider adding next time is a welcome page.
 
 ### Open-source libraries used
 
 - Add any links to open-source libraries used in your project.
+- https://openai.com/
+- https://courses.codepath.org/courses/site/unit/3#!assignment
+- https://www.themoviedb.org/
 
 ### Shout out
 
 Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+- Greg
+- Enes
